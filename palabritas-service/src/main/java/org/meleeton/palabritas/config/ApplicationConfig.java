@@ -1,10 +1,7 @@
 package org.meleeton.palabritas.config;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
-import org.meleeton.palabritas.api.model.Repository;
 import org.meleeton.palabritas.consumer.github.api.GithubAPIClient;
 import org.meleeton.palabritas.consumer.github.config.ConsumerConfig;
 import org.meleeton.palabritas.producer.config.ProducerConfig;
@@ -24,8 +21,8 @@ public class ApplicationConfig {
 	
 	@PostConstruct
 	public void consumer() {
-		List<Repository> repositories = githubClient.getBestRepositories();
-		logger.info("Founded {} repositories", repositories.size());
+		String repositories = githubClient.getBestRepositories();
+		System.out.println(repositories);
 	}
 	
 }

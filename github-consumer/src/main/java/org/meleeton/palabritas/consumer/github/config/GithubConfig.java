@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="consumer.configuration")
 public class GithubConfig {
 	
-	private String githubUrl;
+	private String githubUrl = "https://api.github.com";
 
 	public String getGithubUrl() {
 		return githubUrl;

@@ -20,12 +20,6 @@
 	</Appenders>
 
 	<Loggers>
-	
-		<logger level="debug"
-			name="AUDIT"
-			additivity="false">
-			<AppenderRef ref="AuditFile" />
-		</logger>
 		
 		<logger level="debug"
 			name="org.meleeton.palabritas"

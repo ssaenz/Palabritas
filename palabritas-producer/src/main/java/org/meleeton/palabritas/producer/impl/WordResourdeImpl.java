@@ -19,7 +19,7 @@ import com.google.gson.GsonBuilder;
 public class WordResourdeImpl implements WordResource{
 
 	@Override
-	public Response getWords(String offset) {
+	public Response getWords(int offset, int limit) {
 		List<CommitWord> commitWords = new ArrayList<>();
 		
 		//TODO add words

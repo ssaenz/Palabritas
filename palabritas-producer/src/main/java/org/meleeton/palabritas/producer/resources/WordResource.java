@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 public interface WordResource {
 	
 	@GET
-	@Path("/{offset}")
+	@Path("/{offset}/{limit}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getWords(@PathParam("offset") String offset);
+	public Response getWords(@PathParam("offset") int offset,@PathParam("limit") int limit);
 }

@@ -22,7 +22,8 @@ public class ApplicationConfig {
 	@PostConstruct
 	public void consumer() {
 		String repositories = githubClient.getBestRepositories();
-		System.out.println(repositories);
+		logger.info(repositories);
+//		System.out.println(repositories);
 	}
 	
 }

@@ -7,8 +7,8 @@ public class Repository {
 	private String name;
 	private String fullName;
 	private String htmlURL;
-	private String apiURL;
-	private List<Commit> commits;
+	private String Url;
+	private List<CommitWord> commits;
 	
 	public String getName() {
 		return name;
@@ -35,14 +35,14 @@ public class Repository {
 	}
 	
 	public String getApiURL() {
-		return apiURL;
+		return Url;
 	}
 	
 	public void setApiURL(String apiURL) {
-		this.apiURL = apiURL;
+		this.Url = apiURL;
 	}
 	
-	public void addCommit(Commit newCommit){
+	public void addCommit(CommitWord newCommit){
 		commits.add(newCommit);
 	}
 	

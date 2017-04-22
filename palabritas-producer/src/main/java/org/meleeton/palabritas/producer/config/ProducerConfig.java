@@ -10,6 +10,7 @@ import org.apache.cxf.message.Message;
 import org.apache.cxf.transport.common.gzip.GZIPInInterceptor;
 import org.apache.cxf.transport.common.gzip.GZIPOutInterceptor;
 import org.meleeton.palabritas.producer.resources.HelloResource;
+import org.meleeton.palabritas.producer.resources.WordResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -29,11 +30,14 @@ public class ProducerConfig {
 	@Autowired
 	private HelloResource helloResource;
 	
+	@Autowired
+	private WordResource wordResource;
+	
     @Bean
     public Server rsServer() {
         JAXRSServerFactoryBean endpoint = new JAXRSServerFactoryBean();
         endpoint.setBus(bus);
-        endpoint.setServiceBeans(Arrays.<Object>asList(helloResource));
+        endpoint.setServiceBeans(Arrays.<Object>asList(helloResource, wordResource));
         
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(Include.NON_NULL);

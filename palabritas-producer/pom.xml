@@ -11,6 +11,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.meleeton.palabritas</groupId>
+			<artifactId>palabritas-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
 		</dependency>
@@ -28,6 +32,10 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
 		</dependency>
 	</dependencies>
 </project>

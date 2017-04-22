@@ -1,16 +1,18 @@
 package org.meleeton.palabritas.api.model;
 
+import java.util.Date;
+
 public class Commit {
 
-	private String shaURL;
+	private String Url;
 	private String message;
-	private String date;
+	private Date date;
 	
 	public String getShaURL() {
-		return shaURL;
+		return Url;
 	}
-	public void setShaURL(String shaURL) {
-		this.shaURL = shaURL;
+	public void setShaURL(String Url) {
+		this.Url = Url;
 	}
 	public String getMessage() {
 		return message;
@@ -18,14 +20,10 @@ public class Commit {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
-	}
-	
-	public String toString(){
-		return this.shaURL;
 	}
 }

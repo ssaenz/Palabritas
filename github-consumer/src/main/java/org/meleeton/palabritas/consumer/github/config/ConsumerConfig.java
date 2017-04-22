@@ -3,31 +3,29 @@ package org.meleeton.palabritas.consumer.github.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 @Configuration
 @ComponentScan ({"org.meleeton.palabritas.consumer.github"})
-@EnableConfigurationProperties
-@ConfigurationProperties(prefix="consumer.configuration")
+@Import({GithubConfig.class})
 public class ConsumerConfig {
 	
-	private String githubUrl;
-
-	public String getGithubUrl() {
-		return githubUrl;
-	}
-
-	public void setGithubUrl(String githubUrl) {
-		this.githubUrl = githubUrl;
+	@Autowired
+	GithubConfig config;
+	
+	@PostConstruct
+	public void onInit () {
+		System.out.println("*******************" + config.getGithubUrl());
 	}
 	
 	@Bean
@@ -39,7 +37,7 @@ public class ConsumerConfig {
 	public WebClient syncClient() {
 		List<Object> providers = new ArrayList<>();
 		providers.add(new JacksonJsonProvider());
-		return createWebClient(githubUrl, providers);
+		return createWebClient(config.getGithubUrl(), providers);
 	}
 	
 	private static WebClient createWebClient (String url, List<Object> providers) {

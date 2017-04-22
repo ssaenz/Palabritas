@@ -25,6 +25,10 @@
 			<groupId>org.meleeton.palabritas</groupId>
 			<artifactId>palabritas-producer</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.meleeton.palabritas</groupId>
+			<artifactId>github-consumer</artifactId>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

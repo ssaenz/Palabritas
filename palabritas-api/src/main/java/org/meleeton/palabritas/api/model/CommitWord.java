@@ -2,7 +2,7 @@ package org.meleeton.palabritas.api.model;
 
 import java.util.List;
 
-public class Word {
+public class CommitWord {
 	
 	private String word;
 	private double occurrences;

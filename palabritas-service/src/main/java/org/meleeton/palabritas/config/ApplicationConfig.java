@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({ServletConfig.class})
+@Import({ServletConfig.class, ProducerConfig.class})
 public class ApplicationConfig {
 	
 }

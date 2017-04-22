@@ -18,6 +18,7 @@
 
 	<properties>
 		<spring.boot.version>1.5.3.RELEASE</spring.boot.version>
+		<springframework.version>4.3.8.RELEASE</springframework.version>
 		<cxf.version>3.1.11</cxf.version>
 		<jaxrs.version>2.1-m07</jaxrs.version>
 		<clogging.version>1.2</clogging.version>
@@ -31,6 +32,31 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>org.meleeton.palabritas</groupId>
+				<artifactId>palabritas-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.meleeton.palabritas</groupId>
+				<artifactId>palabritas-impl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.meleeton.palabritas</groupId>
+				<artifactId>palabritas-producer</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.meleeton.palabritas</groupId>
+				<artifactId>github-consumer</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.meleeton.palabritas</groupId>
+				<artifactId>palabritas-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter</artifactId>
 				<version>${spring.boot.version}</version>
@@ -39,6 +65,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
 				<version>${spring.boot.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${springframework.version}</version>
 			</dependency>
 
 			<dependency>

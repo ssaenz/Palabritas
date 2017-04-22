@@ -14,6 +14,7 @@
 		<module>palabritas-impl</module>
 		<module>github-consumer</module>
 		<module>palabritas-producer</module>
+		<module>palabritas-persistence</module>
 	</modules>
 
 	<properties>
@@ -57,7 +58,12 @@
 				<artifactId>palabritas-service</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.meleeton.palabritas</groupId>
+				<artifactId>palabritas-persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot</artifactId>
@@ -73,7 +79,11 @@
 				<artifactId>spring-boot-starter-web</artifactId>
 				<version>${spring.boot.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-mongodb</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>

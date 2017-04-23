@@ -1,4 +1,4 @@
-package org.meleeton.palabritas.api.model;
+package org.meleeton.palabritas.persistence.model;
 
 import java.util.Date;
 

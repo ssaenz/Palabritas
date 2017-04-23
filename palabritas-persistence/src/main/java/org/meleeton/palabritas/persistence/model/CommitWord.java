@@ -1,6 +1,11 @@
-package org.meleeton.palabritas.api.model;
+package org.meleeton.palabritas.persistence.model;
+
+import org.springframework.data.annotation.Id;
 
 public class CommitWord {
+	
+	@Id
+    public String id;
 	
 	private String word;
 	private double occurrences;

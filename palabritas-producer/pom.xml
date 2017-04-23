@@ -12,10 +12,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.meleeton.palabritas</groupId>
-			<artifactId>palabritas-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.meleeton.palabritas</groupId>
 			<artifactId>palabritas-persistence</artifactId>
 		</dependency>
 		<dependency>

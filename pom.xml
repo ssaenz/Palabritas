@@ -10,7 +10,6 @@
 
 	<modules>
 		<module>palabritas-service</module>
-		<module>palabritas-api</module>
 		<module>palabritas-impl</module>
 		<module>github-consumer</module>
 		<module>palabritas-producer</module>
@@ -33,11 +32,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>org.meleeton.palabritas</groupId>
-				<artifactId>palabritas-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>org.meleeton.palabritas</groupId>
 				<artifactId>palabritas-impl</artifactId>

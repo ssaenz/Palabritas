@@ -5,8 +5,8 @@ import java.util.List;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import org.meleeton.palabritas.api.model.CommitWord;
 import org.meleeton.palabritas.persistence.CommitWordRepository;
+import org.meleeton.palabritas.persistence.model.CommitWord;
 import org.meleeton.palabritas.producer.resources.WordResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -25,10 +25,13 @@ public class WordResourdeImpl implements WordResource{
 
 	@Override
 	public Response getWords(int offset, int limit) {
+		
 		Gson gson = new GsonBuilder()
 				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 				.create();
+		
 		List<CommitWord> words = repo.findAll(new Sort(new Sort.Order(Sort.Direction.DESC, "occurrences")));
+		
 		String jsonElement = gson.toJson(words);
 		return Response.ok(jsonElement).build();
 	}

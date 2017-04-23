@@ -19,10 +19,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.meleeton.palabritas</groupId>
-			<artifactId>palabritas-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.meleeton.palabritas</groupId>
 			<artifactId>palabritas-producer</artifactId>
 		</dependency>
 		<dependency>

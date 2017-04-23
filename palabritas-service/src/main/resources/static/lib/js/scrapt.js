@@ -1,8 +1,6 @@
 function loadWordCloud(words) {
 
 	$('#wordcloud').jQCloud(words, {
-		//width: 300,
-		height: 500,
 		autoResize: true
 	});
 
@@ -168,12 +166,16 @@ function renderWordsInCloud(words) {
 
 function parseWords(words) {
 
+	// , html: {class: "hoverClass", "data-pos": "***posicion", "data-count": "***veces repetidas"}},
+
 	parsedWords = [];
 	words.forEach(function(word, index) {
 
+		var position = index + 1;
 		var parsedWord = {};
 		parsedWord.text = word.word;
 		parsedWord.weight = word.occurrences;
+		parsedWord.html = { class: "hoverClass", "data-pos": position, "data-count": parsedWord.weight };
 		console.log(word, parsedWord);
 		parsedWords.push(parsedWord);
 	});

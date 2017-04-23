@@ -1,47 +1,13 @@
-var words = [
-  {text: "Lorem", weight: 13, html: {class: "hoverClass", "data-pos": "1", "data-count": "1000"}},
-  {text: "Ipsum", weight: 10.5},
-  {text: "Dolor", weight: 9.4},
-  {text: "Sit", weight: 8},
-  {text: "Amet", weight: 6.2},
-  {text: "Consectetur", weight: 5},
-  {text: "Adipiscing", weight: 5}
-];
+function loadWordCloud(words) {
 
-$(document).ready(function() {
 	$('#wordcloud').jQCloud(words, {
-	  //width: 300,
-	  height: 500,
-	  autoResize: true
+		//width: 300,
+		height: 500,
+		autoResize: true
 	});
 
 	var save;
 	var myhtml;
-	$("#wordcloud_word_0").hover(
-	  function() {
-	    //cuando está dentro
-		console.log("mete");
-		save = $(this).clone();
-		$(this).text("kowadonga");
-	  }, function() {
-	    //cuando sale
-		console.log("saca");
-		$(this).after(save).remove();
-	  }
-	);
-	/*$("#wordcloud").on({
-	    mouseenter: function () {
-	       	//cuando está dentro
-			save = $(this).text();
-			myhtml = '<span class="list-content-wrapper cloud-view"><span class="list-pos">3</span><span class="list-word">Palabra clave 3</span><span class="list-count">1100</span></span>';
-			$(this).text("").append(myhtml);
-	    },
-	    mouseleave:function () {
-	       	//cuando sale
-	       	console.log(save);
-			$(this).text(save);
-	    }
-	},'span');*/
 	$('#wordcloud').on({
 		mouseenter: function () {
 			var bw = parseInt($(this).width());
@@ -49,13 +15,13 @@ $(document).ready(function() {
 			var lpos = parseInt($(this).position().left);
 			var tpos = parseInt($(this).position().top);
 			var extrapad;
-			if($(this).hasClass("w1")) {extrapad = 20;} 
-			else if($(this).hasClass("w2") || $(this).hasClass("w3")) {extrapad = 30;} 
-			else if($(this).hasClass("w4")) {extrapad = 40;} 
+			if($(this).hasClass("w1")) {extrapad = 20;}
+			else if($(this).hasClass("w2") || $(this).hasClass("w3")) {extrapad = 30;}
+			else if($(this).hasClass("w4")) {extrapad = 40;}
 			else {extrapad = 60;}
 			var myhtml = '<div class="cloudExpand" style="width: '+(bw+extrapad)+'px; height: '+(bh+extrapad)+'px; position: absolute; left: '+(lpos-(extrapad/2))+'px; top: '+(tpos-(extrapad/2))+'px;z-index: 9999;font-size: '+$(this).css("font-size")+';">';
-			myhtml += '<span class="list-pos">1</span>';
-			myhtml += '<span class="rest"><span class="list-word">'+$(this).text()+'</span><br><span class="list-count">1300</span></span>';
+			myhtml += '<span class="list-pos">'+$(this).data("pos")+'</span>';
+			myhtml += '<span class="rest"><span class="list-word">'+$(this).text()+'</span><br><span class="list-count">'+$(this).data("count")+'</span></span>';
 			myhtml += '</div>';
 			$(this).after(myhtml);
 		} },'> span');
@@ -64,7 +30,10 @@ $(document).ready(function() {
 			$(this).remove();
 		}
 	},'.cloudExpand');
-	
+}
+
+$(document).ready(function() {
+
 	/* SECREEEET */
 	var ftext;
 	var audio = new Audio('lib/mp3/secret.mp3');
@@ -83,44 +52,45 @@ $(document).ready(function() {
 			$("footer .container > p").text(ftext);
 			audio.pause();
 			audio.currentTime = 0;
-			//spectrum();
-			//$('.general-content').css("background-color", "#eee");
 		}
 	});
-
-	function spectrum(id){
-		/*var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-    	setInterval(spectrum($(id).animate( { backgroundColor: hue }, 1000),2000));
-		if(id == undefined) return false;*/
-	}
 });
 
 $(function() {
 
 	initialLoad();
-
-	var words = [
-		{text: "Lorem", weight: 50},
-		{text: "Ipsum", weight: 10.5},
-		{text: "Dolor", weight: 9.4},
-		{text: "Sit", weight: 8},
-		{text: "Amet", weight: 6.2},
-		{text: "Consectetur", weight: 5},
-		{text: "Adipiscing", weight: 5}
-	];
-
-	$('.cloud-view').jQCloud(words, {
-		autoResize: true
-	});
+	changeView();
 
 });
+
+function changeView() {
+
+	$('.btn-list').on('click', function() {
+
+		getSortedWords(0, 10, function(words) {
+			renderWords(words, 'list');
+		});
+
+		return false;
+	});
+
+	$('.btn-cloud').on('click', function() {
+
+		getSortedWords(0, 30, function(words) {
+			renderWords(words, 'cloud');
+		});
+
+		return false;
+	});
+
+}
 
 /** INITIAL LOAD OF DATA **/
 // Initial load of the page will render a list with the first most 10 used words
 function initialLoad() {
 
 	var offset = 0;
-	var limit = 10;
+	var limit = 20;
 	var view = 'list'; // Future views can include [list, tagcloud, history...]
 	getSortedWords(offset, limit, function(words) {
 		renderWords(words, view);
@@ -133,7 +103,7 @@ function getSortedWords(offset, limit, callback) {
 
 	var urlBase = 'http://localhost:8081/palabritas-service';
 	var url = urlBase + '/commitwords';
-	url = '/mock.json';
+	//url = '/mock.json';
 	var data = {};
 	data.offset = offset;
 	data.limit = limit;
@@ -175,5 +145,39 @@ function renderWordsInList(words) {
 
 	// We attach it to the list
 	var $listView = $('.list-view');
-	$listView.append($wordListHtml);
+	$listView.html($wordListHtml);
+
+	$('.list-view').show();
+	$('#wordcloud').hide();
+	$('.btn-list').addClass('active');
+	$('.btn-cloud').removeClass('active');
+}
+
+function renderWordsInCloud(words) {
+
+	if ($('#wordcloud').length > 0) {
+		var words = parseWords(words);
+		loadWordCloud(words);
+	}
+
+	$('.list-view').hide();
+	$('#wordcloud').show();
+	$('.btn-cloud').addClass('active');
+	$('.btn-list').removeClass('active');
+}
+
+function parseWords(words) {
+
+	parsedWords = [];
+	words.forEach(function(word, index) {
+
+		var parsedWord = {};
+		parsedWord.text = word.word;
+		parsedWord.weight = word.occurrences;
+		console.log(word, parsedWord);
+		parsedWords.push(parsedWord);
+	});
+
+	return parsedWords;
+
 }

@@ -152,6 +152,9 @@ ul.list-content-wrapper {
 	padding-right: 15px;
 }
 /* cloud-view mode */
+.cloud-view {
+	display: none;
+}
 
 .cloud-view .list-box {
 	background-color: #2BBBAD;

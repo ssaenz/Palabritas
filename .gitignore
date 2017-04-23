@@ -40,3 +40,6 @@ target
 .project
 .classpath
 .settings
+# PHPStorm files      #
+######################
+.idea

@@ -16,7 +16,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-@Path("/words")
+@Path("/commitwords")
 @Service
 public class WordResourdeImpl implements WordResource{
 	
@@ -31,7 +31,8 @@ public class WordResourdeImpl implements WordResource{
 				.create();
 		
 		List<CommitWord> words = repo.findAll(new Sort(new Sort.Order(Sort.Direction.DESC, "occurrences")));
-		
+		int toIndex = offset + limit < words.size() ? offset + limit : words.size();
+		words = words.subList(offset, toIndex);
 		String jsonElement = gson.toJson(words);
 		return Response.ok(jsonElement).build();
 	}

@@ -23,11 +23,6 @@ public class ConsumerConfig {
 	@Autowired
 	GithubConfig config;
 	
-	@PostConstruct
-	public void onInit () {
-		System.out.println("*******************" + config.getGithubUrl());
-	}
-	
 	@Bean
 	public JacksonJsonProvider getJacksonJsonProvider() {
 		return new JacksonJsonProvider();

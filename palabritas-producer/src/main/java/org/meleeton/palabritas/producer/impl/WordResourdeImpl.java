@@ -1,13 +1,12 @@
 package org.meleeton.palabritas.producer.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 import org.meleeton.palabritas.api.model.CommitWord;
+import org.meleeton.palabritas.persistence.resources.CommitRepository;
 import org.meleeton.palabritas.producer.resources.WordResource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.FieldNamingPolicy;
@@ -18,15 +17,23 @@ import com.google.gson.GsonBuilder;
 @Service
 public class WordResourdeImpl implements WordResource{
 
+	@Autowired
+	private CommitRepository repo;
+
 	@Override
 	public Response getWords(int offset, int limit) {
-		List<CommitWord> commitWords = new ArrayList<>();
 		
 		//TODO add words
+		
+		
+		
 		Gson gson = new GsonBuilder()
 				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 				.create();
 		
+		
+//		List<CommitWord> commitWords = new ArrayList<>();
+/*
 		CommitWord cw1 = new CommitWord();
 		cw1.setWord("bugfix");
 		cw1.setOccurrences(2573);
@@ -46,14 +53,24 @@ public class WordResourdeImpl implements WordResource{
 		CommitWord cw5 = new CommitWord();
 		cw5.setWord("performance");
 		cw5.setOccurrences(7395);
-
-		commitWords.add(cw1);
-		commitWords.add(cw2);
-		commitWords.add(cw3);
-		commitWords.add(cw4);
-		commitWords.add(cw5);
 		
-		String jsonElement = gson.toJson(commitWords);
+		
+		repo.save(cw1);
+		repo.save(cw2);
+		repo.save(cw3);
+		repo.save(cw4);
+		repo.save(cw5);
+		
+		
+		System.out.println("Iniciando insert");
+		repo.addCommitWord("bugfix");
+		repo.addCommitWord("hotfix");
+		repo.addCommitWord("typo");
+		repo.addCommitWord("performance");
+		repo.addCommitWord("connection");
+*/
+		
+		String jsonElement = gson.toJson(repo.findAll());
 		return Response.ok(jsonElement).build();
 	}
 }

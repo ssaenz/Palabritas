@@ -10,6 +10,10 @@ import org.meleeton.palabritas.consumer.github.api.GithubAPIClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 @Service
 public class GithubAPIClientImpl implements GithubAPIClient {
 	
@@ -35,7 +39,19 @@ public class GithubAPIClientImpl implements GithubAPIClient {
 
 	@Override
 	public List<Commit> getCommitByRepository(String userName, String repoName) {
-		// TODO Auto-generated method stub
+		githubClient.back(Boolean.TRUE);
+		githubClient.path(SEARCH_REPO_PATH + "/" + userName + "/" + repoName + "/commits");
+		
+		Response response = githubClient.get();
+		
+//		System.out.println("status: " + response.getStatus());
+		String repos = response.readEntity(String.class);
+		
+		Gson gson = new GsonBuilder()
+				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+				.create();
+		
+//		System.out.println("repositories" + repos);
 		return null;
 	}
 

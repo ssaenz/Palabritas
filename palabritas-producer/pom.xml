@@ -15,6 +15,10 @@
 			<artifactId>palabritas-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.meleeton.palabritas</groupId>
+			<artifactId>palabritas-persistence</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
 		</dependency>

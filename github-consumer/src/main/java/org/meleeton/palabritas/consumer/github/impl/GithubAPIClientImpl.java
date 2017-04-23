@@ -1,18 +1,11 @@
 package org.meleeton.palabritas.consumer.github.impl;
 
-import java.util.List;
-
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.meleeton.palabritas.consumer.github.api.GithubAPIClient;
-import org.meleeton.palabritas.persistence.model.Commit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 @Service
 public class GithubAPIClientImpl implements GithubAPIClient {

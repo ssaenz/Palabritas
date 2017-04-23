@@ -32,7 +32,7 @@ public class WordResourdeImpl implements WordResource{
 		
 		List<CommitWord> words = repo.findAll(new Sort(new Sort.Order(Sort.Direction.DESC, "occurrences")));
 		int toIndex = offset + limit < words.size() ? offset + limit : words.size();
-		words.subList(offset, toIndex);
+		words = words.subList(offset, toIndex);
 		String jsonElement = gson.toJson(words);
 		return Response.ok(jsonElement).build();
 	}

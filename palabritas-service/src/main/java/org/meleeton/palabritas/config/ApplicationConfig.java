@@ -1,6 +1,9 @@
 package org.meleeton.palabritas.config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.annotation.PostConstruct;
 
@@ -14,8 +17,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.query.Criteria;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 @Configuration
 @Import({ServletConfig.class, ProducerConfig.class, ConsumerConfig.class})
@@ -30,30 +36,53 @@ public class ApplicationConfig {
 	
 	@PostConstruct
 	public void consumer() {
-//		String repositories = githubClient.getBestRepositories();
-//		logger.info(repositories);
-//		CommitWord word = new CommitWord();
-//		word.setOccurrences(2);
-//		word.setWord("Hola2");
-		System.out.println("Repo.update");
-		CommitWord hola = new CommitWord();
-		hola.setWord("Hola3");
-		hola.setOccurrences(5);
-		repo.save(hola);
-		List<CommitWord> words = repo.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "occurrences")));
-		words.forEach(w -> {
-			System.out.println(w.getOccurrences() + " " + w.getWord());
+		
+		String repositories = githubClient.getBestRepositories();
+		System.out.println(repositories);
+		JsonElement jsonElement = new JsonParser().parse(repositories);
+		
+		JsonObject jsonObject = jsonElement.getAsJsonObject();
+		
+		JsonArray repos = jsonObject.get("items").getAsJsonArray();
+		
+		repos.forEach(repo -> {
+			String fullName = repo.getAsJsonObject().get("full_name").getAsString();
+			String commits = githubClient.getCommitByRepository(fullName);
+			
+			JsonElement commitsElement = new JsonParser().parse(commits);
+			System.out.println(commits);
+			JsonArray commitsArray = commitsElement.getAsJsonArray();
+			
+			commitsArray.forEach(commit -> {
+				String message = commit.getAsJsonObject().get("commit").getAsJsonObject().get("message").getAsString();
+				process(message);
+			});
 		});
-		System.out.println("Repo.findAll");
-//		repo.save(word);
-		CommitWord hi = repo.findByWord("Hola3");
-		hi.setOccurrences(6);
-		repo.save(hi);
-		List<CommitWord> words2 = repo.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "occurrences")));
-		words2.forEach(w -> {
-			System.out.println(w.getOccurrences() + " " + w.getWord());
-		});
-//		repo.findOne(Criteria.where("word").is("Hola"));
+	}
+	
+	private void process (String message) {
+		String[] stringArray = {"a", "an", "and", "aboard", "about", "abobe", "abreast", "abroad", "absent", "across", "adjacent", "after", "against", "along", "alonside", "amid", "among", "apropos", "apud", "around", "as", "astride", "at", "atop", "ontop", "bar", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "chez", "circa", "come", "despite", "down", "during", "except", "for", "from", "in", "inside", "into", "less", "like", "minus", "near", "notwithstanding", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "pace", "past", "per", "post", "pre", "pro", "qua", "re", "sana", "save", "short", "since", "than", "the", "through", "throughout", "to", "toward", "towards", "under", "underneath", "unlike", "until", "up", "upon", "upside", "versus", "via", "vice", "with", "within", "without", "worth"};
+		List<String> connectors = new ArrayList<String>(Arrays.asList(stringArray));
+		
+		Scanner s= new Scanner(message);
+		while(s.hasNext()){
+		    String word= s.next();
+		    if (word.matches("[a-zA-z]{2,}") && !connectors.contains(word))
+		    	saveWord(word);
+		}
+		s.close();
+	}
+	
+	private void saveWord (String word) {
+		CommitWord commitWord = repo.findByWord(word);
+		if (commitWord != null) {
+			commitWord.setOccurrences(commitWord.getOccurrences() + 1);
+		} else {
+			commitWord = new CommitWord();
+			commitWord.setWord(word);
+			commitWord.setOccurrences(1);
+		}
+		repo.save(commitWord);
 	}
 	
 }

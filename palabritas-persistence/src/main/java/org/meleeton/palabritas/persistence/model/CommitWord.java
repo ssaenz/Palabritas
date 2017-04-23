@@ -8,7 +8,7 @@ public class CommitWord {
     public String id;
 	
 	private String word;
-	private double occurrences;
+	private long occurrences;
 	
 	public String getWord() {
 		return word;
@@ -17,10 +17,10 @@ public class CommitWord {
 		this.word = word;
 	}
 	
-	public double getOccurrences() {
+	public long getOccurrences() {
 		return occurrences;
 	}
-	public void setOccurrences(int occurrences) {
+	public void setOccurrences(long occurrences) {
 		this.occurrences = occurrences;
 	}
 	public void sumOccurrence(){

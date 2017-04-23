@@ -19,11 +19,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.meleeton.palabritas</groupId>
-			<artifactId>palabritas-api</artifactId>
+			<artifactId>palabritas-producer</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.meleeton.palabritas</groupId>
-			<artifactId>palabritas-producer</artifactId>
+			<artifactId>palabritas-persistence</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.meleeton.palabritas</groupId>

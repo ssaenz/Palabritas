@@ -5,8 +5,8 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.meleeton.palabritas.api.model.Commit;
 import org.meleeton.palabritas.consumer.github.api.GithubAPIClient;
+import org.meleeton.palabritas.persistence.model.Commit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

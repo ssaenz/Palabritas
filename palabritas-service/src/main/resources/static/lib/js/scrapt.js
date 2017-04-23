@@ -128,7 +128,6 @@ function getSortedWords(offset, limit, callback) {
 
 	var urlBase = 'http://localhost:8081/palabritas-service';
 	var url = urlBase + '/commitwords';
-	url = '/mock.json';
 	var data = {};
 	data.offset = offset;
 	data.limit = limit;

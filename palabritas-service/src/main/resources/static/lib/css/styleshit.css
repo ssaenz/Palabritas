@@ -3,7 +3,7 @@
 	}
 .header-top-bg {
 	/*background: #FF00FF;*/
-	background: transparent;
+	background: url("../img/bg-shit.gif") no-repeat center center / cover;
 	color: #fff;
 	text-align: center;
 	position: relative;
@@ -13,6 +13,7 @@
 }
 .title-box {
 	position: relative;
+	background: transparent url('../img/hollyfucker.gif') no-repeat center center / 100% 100%;
 }
 .title-box:after {
 	content: '';
@@ -28,6 +29,7 @@
 	font-size: 1.4375em;
 	font-weight: 200;
 	margin-top: 40px;
+	text-shadow: 0px 0px 0px transparent;
 }
 .title-box h1{
 	color: #FF00FF;
@@ -51,8 +53,7 @@
     width: 80%;
 }
 .content-title h2 {
-    font-weight: 300;
-    margin: 0;
+    color: red;
 }
 .btn-container {
 	display: inline-block;
@@ -94,8 +95,8 @@ ul.list-content-wrapper {
 	border-top: 0px solid transparent;
 }
 .list-view .list-box:hover {
-	background-color: #fff;
-	color: #000;
+    color: green;
+    background-color: red;
 }
 .list-view .list-box:first-of-type {
 	border-top: 1px solid #000;
@@ -240,8 +241,7 @@ ul.list-content-wrapper {
 }
 
 footer {
-	background-color: #FF00FF;
-	color: #fff;
-	padding-top: 15px;
-	padding-bottom: 6px;
+	background-color: red;
+	color: green;
+	font-weight: bolder;
 }

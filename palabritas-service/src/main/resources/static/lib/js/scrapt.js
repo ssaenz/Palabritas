@@ -67,6 +67,8 @@ $(document).ready(function() {
 	
 	/* SECREEEET */
 	var ftext;
+	var audio = new Audio('lib/mp3/secret.mp3');
+
 	$( ".secret" ).on( "click", function() {
 		if($("footer + link").length == 0) {
 			// a joder corneas!
@@ -74,10 +76,13 @@ $(document).ready(function() {
 			//setInterval(spectrum('.general-content'),99999999);
 			ftext = $("footer .container > p").text();
 			$("footer .container > p").text("Powered by GeoCities.");
+			audio.play();
 		}else{
 			// BASTAAAA!
 			$("footer + link").remove();
 			$("footer .container > p").text(ftext);
+			audio.pause();
+			audio.currentTime = 0;
 			//spectrum();
 			//$('.general-content').css("background-color", "#eee");
 		}
@@ -128,6 +133,7 @@ function getSortedWords(offset, limit, callback) {
 
 	var urlBase = 'http://localhost:8081/palabritas-service';
 	var url = urlBase + '/commitwords';
+	url = '/mock.json';
 	var data = {};
 	data.offset = offset;
 	data.limit = limit;

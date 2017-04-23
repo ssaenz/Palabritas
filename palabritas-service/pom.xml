@@ -27,6 +27,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.meleeton.palabritas</groupId>
+			<artifactId>palabritas-persistence</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.meleeton.palabritas</groupId>
 			<artifactId>github-consumer</artifactId>
 		</dependency>
 		
